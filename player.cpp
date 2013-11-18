@@ -1,6 +1,5 @@
 #include "player.h"
 
-
 player::player(int ch, std::string s) : chips(ch), name(s)
 {
 }
