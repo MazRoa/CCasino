@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CARDGAME_H
+#define CARDGAME_H
+
 #include <cstdlib>
 #include <list>
 #include <iostream>
@@ -19,7 +21,7 @@ public:
 protected:
 	virtual card deal();
 
-	void shuffle(std::list<card> &d);
+	void shuffle(list<card> &d);
 	void displayTable(const list<card> *, player &, const int &,
 		const std::string &, const list<card> * = nullptr, const list<card> * = nullptr,
 		const int & = 0);
@@ -27,9 +29,9 @@ protected:
 	void reshuffle();
 	void bettingPrompt();
 
-	std::list<card> deck;
-	std::list<card> gamblerHand;
-	std::list<card> restDeck;
+	list<card> deck;
+	list<card> gamblerHand;
+	list<card> restDeck;
 	int pot;
 
 private:
@@ -38,3 +40,4 @@ private:
 	void displayCardRank(int &, list<card>::iterator );
 };
 
+#endif

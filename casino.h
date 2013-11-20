@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CASINO_H
+#define CASINO_H
+
 #include <string>
 #include <iostream>
 #include "player.h"
@@ -11,6 +13,7 @@ public:
 	casino();
 	~casino();
 
-	void enter();  // you know, when you enter to the casino you will return with nothing :)
+	void enter();  // when you enter to the casino you will return with nothing :)
 };
 
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #include <list>
 #include <string>
 #include <iostream>
@@ -16,11 +18,10 @@ public:
 	int getChips(){ return chips; }
 	int bet(int, bool = false);
 	void reward(int);
-
-
-
+	
 private:
 	int chips;
 	std::string name;
 };
 
+#endif

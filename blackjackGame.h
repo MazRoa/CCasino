@@ -1,4 +1,6 @@
-#pragma once
+#ifndef BLACKJACKGAME_H
+#define BLACKJACKGAME_H
+
 #include "cardGame.h"
 
 class blackjackGame :
@@ -30,3 +32,4 @@ private:
 	
 };
 
+#endif

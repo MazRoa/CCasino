@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CARD_H
+#define CARD_H
+
 #include <string>
 class card
 {
@@ -40,4 +42,5 @@ private:
 };
 
 
+#endif
 

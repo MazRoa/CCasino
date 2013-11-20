@@ -1,4 +1,6 @@
-#pragma once
+#ifndef POKERGAME_H
+#define POKERGAME_H
+
 #include <vector>
 #include "cardGame.h"
 class pokerGame :
@@ -10,7 +12,6 @@ public:
 
 	pokerGame();
 	~pokerGame();
-		
 
 	void play(player &);
 
@@ -31,11 +32,10 @@ private:
 
 	void changeCards(player &);
 
-
 	static std::string pokerHandsNames[];
 	static int rewardMult[];
-
-
-	
+		
 };
+
+#endif
 
