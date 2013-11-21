@@ -25,7 +25,7 @@ protected:
 	void displayTable(const list<card> *, player &, const int &,
 		const std::string &, const list<card> * = nullptr, const list<card> * = nullptr,
 		const int & = 0);
-	virtual void cleanTable();
+	virtual void cleanTable() = 0;
 	void reshuffle();
 	void bettingPrompt();
 

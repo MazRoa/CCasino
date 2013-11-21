@@ -8,7 +8,6 @@ cardGame::cardGame() : pot(0)
 
 cardGame::~cardGame()
 {
-	//delete deck;
 }
 
 void cardGame::initDeck()
@@ -66,6 +65,8 @@ void cardGame::displayHand(list<card> hand)
 	int b;
 	std::string cardDesign[14] = { "02020", "20202", "50005", "50205", "50505",
 		"52505", "52525", "57505", "57525", "71152", "25563", "55655", "00200", "joker" };
+	// each digit in five-digit numbers is one line of current drawn card 
+	// i.e '5' (binary - 101) = sign, no sign, sign
 		
 	for (int rows = 0; rows < 9; ++rows)
 	{
@@ -94,12 +95,12 @@ void cardGame::displayHand(list<card> hand)
 				std::cout << " " << cardDesign[12][rows - 2] << "  : ";
 				continue;
 			}
-			s = static_cast<char>(iter->getSuit() + 3);
+			s = static_cast<char>(iter->getSuit() + 3); // calculate card sign ASCII code
 			b = iter->getRank();
 			for (int colbit = 4; colbit > 0; colbit >>= 1)
 			{
 				c = cardDesign[b][rows - 2];
-				std::cout << (atoi(&c) & colbit ? s : ' ');
+				std::cout << (atoi(&c) & colbit ? s : ' '); // calculate whether print or not card sign in current line
 			}
 
 			std::cout << " : ";		
@@ -109,20 +110,15 @@ void cardGame::displayHand(list<card> hand)
 }
 
 void cardGame::displayCardRank(int &_rows, list<card>::iterator _iter)
-{
+{ // top-line and bottom-line with card rank
 	if (_rows == 1) std::cout << ":" << _iter->getRankSymbol() << (_iter->getRank() == card::ten ? "0   : " : "    : ");
-	else
+	else 
 	{
 		std::cout << ":   ";
 		if (_iter->getRank() == card::ten)
 			std::cout << "10: ";
 		else std::cout << " " << _iter->getRankSymbol() << ": ";
 	}
-}
-
-void cardGame::cleanTable()
-{
-
 }
 
 void cardGame::reshuffle()
