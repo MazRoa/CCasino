@@ -30,7 +30,7 @@ void pokerGame::play(player &gambler)
 	displayTable(&gamblerHand, gambler, pot, "Poker");
 	while (true)
 	{
-		if (!gambler.getChips())
+		if (!gambler.getChips()) // if player is broken - goodbye
 		{
 			break;
 		}
@@ -40,7 +40,7 @@ void pokerGame::play(player &gambler)
 		if (!pot) break;
 		else if (pot < 0) continue;
 
-		for (int i = 0; i < 5; ++i)
+		for (int i = 0; i < 5; ++i) // initial deal
 		{
 			gamblerHand.push_back(deal());
 			gamblerHand.back().turnFace();
@@ -112,7 +112,7 @@ void pokerGame::changeCards(player &gambler)
 	}
 }
 
-bool pokerGame::isColor(std::vector<card> *hand) // sprawdz czy jest kolor
+bool pokerGame::isColor(std::vector<card> *hand) //
 {
 	for (int i = 0; i < 4; ++i)
 	{
@@ -125,26 +125,25 @@ bool pokerGame::isColor(std::vector<card> *hand) // sprawdz czy jest kolor
 
 }
 
-bool pokerGame::isStraight(std::vector<card> *hand) // sprawdz czy jest strit
+bool pokerGame::isStraight(std::vector<card> *hand) //
 {
-	for (int i = 0; i < 2; ++i)  // sprawdzenie 4 kart z lewej
+	for (int i = 0; i < 2; ++i)  // checking 4 cards from left
 	{
-		if (hand->at(i+1).getRank() - hand->at(i).getRank() != 1) // jesli roznica miedzy kartami to jedna pozycja starszenstwa
+		if (hand->at(i+1).getRank() - hand->at(i).getRank() != 1) 
 		{
 			return false;
 		}
 	}
-	// powyzsza petla przejdzie do konca jezeli 4 karty z lewej sa w kolejnosci
-
+	
 	if ((hand->front().getRank() == card::two)
 		&& ((hand->back().getRank() == card::ace) || (hand->back().getRank() == card::six)))
-	{
-		return true; // jezeli pierwsza karta to "2" i ostatnia to "as" albo "6"
+	{// Ace can be the lowest or highest card in straight
+		return true; 
 	}
 
 	else if ((hand->at(4).getRank() - hand->at(3).getRank()) != 1)
 	{
-		return false; // i jezeli 2 karty po prawej sa kolejne
+		return false; 
 	}
 	else return true;
 }
@@ -161,13 +160,15 @@ bool pokerGame::isPair(std::vector<card> *hand)
 	return false;
 }
 
-bool pokerGame::isTwoPair(std::vector<card> *hand) // mozliwe wystapienia 2 par: 22334, 22344, 23344
-{
+// "four of a kind" and "full house" must be checked before this function 
+bool pokerGame::isTwoPair(std::vector<card> *hand) 
+{// there are 3 posibilities for two pair: 22334, 22344, 23344
+	
 	if (hand->at(0).getRank() == hand->at(1).getRank())
 	{
 		if (hand->at(2).getRank() == hand->at(3).getRank() || hand->at(3).getRank() == hand->at(4).getRank())
 		{
-			return true; // kareta ani full nie przejdzie w tym warunku bo sa sprawdzana wczesniej
+			return true; 
 		}
 	}
 	else if (hand->at(1).getRank() == hand->at(2).getRank() && hand->at(3).getRank() == hand->at(4).getRank())
@@ -220,9 +221,9 @@ bool pokerGame::isFullHouse(std::vector<card> *hand)
 }
 
 pokerGame::pokerHands pokerGame::checkHand()
-{
-	std::vector<card> *v_gamblerHand = new std::vector<card>[4];
-	auto iter = gamblerHand.begin();
+{ // create temporary vector from list - it's easier to check poker hands with randomaccesssiterator
+	std::vector<card> *v_gamblerHand = new std::vector<card>[5];
+	//auto iter = gamblerHand.begin();
 	for (auto iter = gamblerHand.begin(); iter != gamblerHand.end(); ++iter)
 	{
 		v_gamblerHand->push_back(*iter);

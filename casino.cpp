@@ -13,14 +13,16 @@ casino::~casino()
 void casino::enter()
 {
 	std::string name;
+	bool timeToGoHome = false;
+
+	//blackjackGame game;
 	
 	//std::cout << "Enter your name: ";
 	//std::cin >> name;
 	name = "Player";
-	
 	player gambler(100, name);
 
-	while (true)
+	while (!timeToGoHome)
 	{
 		char input;
 		system("CLS");
@@ -34,26 +36,32 @@ void casino::enter()
 		{
 		case 'b':
 		{
-					blackjackGame *game = new blackjackGame;
-					game->play(gambler);
-					delete game;
-					break;
+			blackjackGame *game = new blackjackGame;
+			game->play(gambler);
+			delete game;
+			break;
 		}
 		case 'p':
 		{
-					pokerGame *game = new pokerGame;
-					game->play(gambler);
-					delete game;
-					break;
+			pokerGame *game = new pokerGame;
+			game->play(gambler);
+			delete game;
+			break;
+		}
+		case 'e':
+		{
+			timeToGoHome = true;
+			break;
 		}
 		default: break;
 		}
 		if (!gambler.getChips())
 		{
-			std::cout << " \n\nSorry, you don't have any money left. Goodbye!";
-			_getch();
+			std::cout << " \n\nSorry, you don't have any money left. ";
 			break;
 		}
-
 	}
+	std::cout << "\nGoodbye!";
+	std::cout << "\nPress any key.";
+	_getch();
 }

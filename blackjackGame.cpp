@@ -24,7 +24,7 @@ int blackjackGame::checkScore(list<card> &hand)
 	for (list<card>::iterator iter = hand.begin(); iter != hand.end(); ++iter)
 	{
 		value = iter->getRankEnum();
-		if (value == card::ace)
+		if (value == card::ace) // an Ace has different points depending o overall hand score
 		{
 			if (score < 11) score += 11;
 			else score += 1;
@@ -33,6 +33,7 @@ int blackjackGame::checkScore(list<card> &hand)
 	return score;
 }
 
+// i know this function is long but it contains all BlackJack mechanics
 void blackjackGame::play(player &gambler)
 {
 	bool b_double, b_insurance, b_split, stand;
@@ -53,6 +54,7 @@ void blackjackGame::play(player &gambler)
 		if (!pot) break;
 		else if (pot < 0) continue;
 
+		// initial dealing
 		hit(&gamblerHand);
 		hit(&dealerHand);
 		hit(&gamblerHand);
@@ -312,7 +314,6 @@ void blackjackGame::cleanTable()
 		if (iter->faceOn()) 
 			iter->turnFace();
 	}
-
 }
 
 void blackjackGame::writePlayerScore()
@@ -338,5 +339,4 @@ void blackjackGame::checkForReshuffling()
 		std::cout << "\n Deck will be reshuffled ";
 		reshuffle();
 	}
-
 }
